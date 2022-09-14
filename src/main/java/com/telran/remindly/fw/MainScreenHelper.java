@@ -17,6 +17,12 @@ public class MainScreenHelper extends HelperBase{
 //        return isElementPresent(By.xpath("//*[@resource-id='com.blanyal.remindly:id/no_reminder_text']");
     }
 
+    public boolean isLicenseeTextPresent() {
+//        return isElementPresent(By.id("toolbar"));
+        tapMoreOptions();
+        return isElementPresent(By.id("title"));
+//        return isElementPresent(By.xpath("toolbar"));
+    }
 
     public void tapMoreOptions() {
         tap(By.xpath("//android.widget.ImageView[@content-desc='More options']"));

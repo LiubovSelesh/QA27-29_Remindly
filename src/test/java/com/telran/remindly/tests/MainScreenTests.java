@@ -13,8 +13,7 @@ public class MainScreenTests extends TestBase{
 
     @Test
     public void checkLicenseTest() {
-        app.getMainScreen().tapMoreOptions();
-
+        app.getMainScreen().isLicenseeTextPresent();
 //        Assert.assertTrue(app.getMainScreen().isLicenseeTextPresent());
 
     }
