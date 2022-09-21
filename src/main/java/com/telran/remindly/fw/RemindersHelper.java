@@ -131,6 +131,10 @@ public class RemindersHelper extends HelperBase{
         tap(By.xpath("//android.widget.TextView[@text='Month']"));
     }
 
-}
+    public void removeNotification() {
+        tap(By.id("recycle_title"));
+        tap(By.id("discard_reminder"));
+    }
 
+}
 

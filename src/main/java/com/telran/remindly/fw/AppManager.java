@@ -2,6 +2,7 @@ package com.telran.remindly.fw;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.AppiumDriver;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException;
@@ -41,5 +42,10 @@ public class AppManager {
 
     public void stop() {
         driver.quit();
+    }
+
+    public void removeNotification() {
+        driver.findElement(By.id("recycle_title")).click();
+        driver.findElement(By.id("discard_reminder")).click();
     }
 }

@@ -2,6 +2,7 @@ package com.telran.remindly.tests;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 public class CreateReminderTests extends TestBase {
@@ -29,7 +30,7 @@ public class CreateReminderTests extends TestBase {
     public void addReminderWithDefaultDataAndTitleTextAssertTest() {
 //tap on add reminder
         app.getReminders().tapOnAddReminder();
-    //fill reminder title
+        //fill reminder title
         app.getReminders().fillReminderTitle("Test");
 //save reminder
         app.getReminders().saveReminder();
@@ -59,15 +60,13 @@ public class CreateReminderTests extends TestBase {
         app.getReminders().saveReminder();
 //assert to add new reminder
         quantityAfterAdd = app.getMainScreen().getTotalReminders();
-        Assert.assertEquals(quantityAfterAdd,quantityBeforeAdd + 1);
+        Assert.assertEquals(quantityAfterAdd, quantityBeforeAdd + 1);
     }
 
     @Test
     public void addReminderWithAllDataTest() {
-
         app.getReminders().tapOnAddReminder();
-
-        app.getReminders().fillReminderTitle("Christmas");
+        app.getReminders().fillReminderTitle("Christmas1");
         app.getReminders().tapOnDataField();
         app.getReminders().pause(500);
         app.getReminders().selectCertainMonth("future", 1, "Oct");
@@ -87,8 +86,12 @@ public class CreateReminderTests extends TestBase {
 //        app.getReminders().selectRepeatTime("Month");
         app.getReminders().selectRepeatTime();
         app.getReminders().saveReminder();
+//        app.getReminders().removeNotification();
 
     }
+    @AfterMethod
+    public void tearDown() {
+        app.removeNotification();
+    }
 }
-
 
