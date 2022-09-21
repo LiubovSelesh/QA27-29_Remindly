@@ -30,6 +30,7 @@ public class RemindersHelper extends HelperBase{
     }
 
     public void selectMonth(String time) {
+        pause(500);
         if (time.equals("past")) {
             swipeDown();
         } else if (time.equals("future")) {
@@ -45,7 +46,91 @@ public class RemindersHelper extends HelperBase{
         tap(By.id("ok"));
     }
 
-}
+    public void selectCertainMonth(String type, int number, String month) {
+        pause(1000);
+//        int i = number;
+        if (!selectedMonth().equals(month)) {
+//            for (int j = 0; j < i; j++) {
+            for (int j = 0; j < number; j++) {
+                if (type.equals("future")) {
+                    swipeUp();
+                } else if (type.equals("past")) {
+                    swipeDown();
+                }
+            }
+        }
+    }
 
+    private String selectedMonth() {
+        return driver.findElement(By.id("date_picker_month")).getText();
+    }
+
+    public void tapOnYear() {
+        tap(By.id("date_picker_year"));
+    }
+
+    public void selectYear(String type1, String year) {
+        pause(2000);
+        if (!getSelectedYear().equals(year)) {
+            if (type1.equals("future")) {
+                swipeUpUntilNeededYear(year);
+            } else if (type1.equals("past")) {
+                swipeDownUntilNeededYear(year);
+            }
+        }
+        tap(By.id("month_text_view"));
+    }
+
+    public void swipeDownUntilNeededYear(String year) {
+        while (!getSelectedYear().equals(year)) {
+            moveDown(By.className("android.widget.ListView"));
+            getSelectedYear();
+        }
+    }
+
+    public void swipeUpUntilNeededYear(String year) {
+        while (!getSelectedYear    ().equals(year)) {
+            moveUp(By.className("android.widget.ListView"));
+            getSelectedYear();
+        }
+    }
+
+
+
+    private String getSelectedYear() {
+        return driver.findElement(By.id("month_text_view")).getText();
+    }
+
+    public void tapOnTime() {
+        tap(By.id("time"));
+    }
+
+    public void selectTimeOfDay(String td) {
+        if (td.equals("am")) {
+            tapWithCoordinates(281, 1332);
+        } else if (td.equals("pm")) {
+            tapWithCoordinates(793, 1323);
+        }
+    }
+
+
+    public void tapOnRepeatSwitch() {
+        tap(By.id("repeat_switch"));
+    }
+
+    public void enterRepeatNumber(String number) {
+        tap(By.id("repeat_no_text"));
+        type(By.className("android.widget.EditText"), number);
+        tap(By.id("android:id/button1"));
+    }
+
+//    public void selectRepeatTime(String repeatMonth) {
+    public void selectRepeatTime() {
+        tap(By.id("repeat_type_text"));
+//        tap(By.xpath("//android.widget.TextView[@text='"+ repeatMonth +"']"));
+        tap(By.xpath("//android.widget.TextView[@text='Month']"));
+    }
+
+}
 
 

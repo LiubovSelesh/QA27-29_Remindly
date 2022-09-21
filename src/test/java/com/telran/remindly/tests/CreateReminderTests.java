@@ -48,8 +48,8 @@ public class CreateReminderTests extends TestBase {
         app.getReminders().fillReminderTitle("Test");
 //tap on data field
         app.getReminders().tapOnDataField();
-//choose month
-        app.getReminders().pause(500);
+//choose random month
+//        app.getReminders().pause(500);
         app.getReminders().selectMonth("future");
 //select day
         app.getReminders().selectDay(19);
@@ -59,7 +59,35 @@ public class CreateReminderTests extends TestBase {
         app.getReminders().saveReminder();
 //assert to add new reminder
         quantityAfterAdd = app.getMainScreen().getTotalReminders();
-        Assert.assertEquals(quantityAfterAdd,quantityBeforeAdd+1);
+        Assert.assertEquals(quantityAfterAdd,quantityBeforeAdd + 1);
+    }
+
+    @Test
+    public void addReminderWithAllDataTest() {
+
+        app.getReminders().tapOnAddReminder();
+
+        app.getReminders().fillReminderTitle("Christmas");
+        app.getReminders().tapOnDataField();
+        app.getReminders().pause(500);
+        app.getReminders().selectCertainMonth("future", 1, "Oct");
+        app.getReminders().selectDay(23);
+        app.getReminders().tapOnYear();
+        app.getReminders().selectYear("future", "2022");
+//        app.getReminders().selectYear("past", "2018");
+        app.getReminders().tapOnOK();
+        app.getReminders().tapOnTime();
+        app.getReminders().selectTimeOfDay("am");
+        app.getReminders().tapWithCoordinates(267, 924);
+        app.getReminders().tapWithCoordinates(543, 1190);
+        app.getReminders().tapOnOK();
+        app.getReminders().tapOnRepeatSwitch();
+        app.getReminders().enterRepeatNumber("3");
+        app.getReminders().swipeUp();
+//        app.getReminders().selectRepeatTime("Month");
+        app.getReminders().selectRepeatTime();
+        app.getReminders().saveReminder();
+
     }
 }
 

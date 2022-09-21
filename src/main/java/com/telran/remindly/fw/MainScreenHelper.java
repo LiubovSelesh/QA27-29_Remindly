@@ -24,15 +24,24 @@ public class MainScreenHelper extends HelperBase{
 //        return isElementPresent(By.xpath("toolbar"));
     }
 
+
     public void tapMoreOptions() {
         tap(By.xpath("//android.widget.ImageView[@content-desc='More options']"));
     }
 
     public int getTotalReminders() {
-        final List<WebElement> id = driver.findElements(By.id("thumbnail_image"));
-        final int idCount = id.size();
+        List<WebElement> id = driver.findElements(By.id("thumbnail_image"));
+        int idCount = id.size();
         System.out.println("Total reminders quantity: " + idCount) ;
         return idCount;
+    }
+
+    public void tapTitle() {
+        tap(By.id("title"));
+    }
+
+    public boolean isLicensesExist(){
+        return isElementPresent(By.id("licenses_text_view"));
     }
 
 }
