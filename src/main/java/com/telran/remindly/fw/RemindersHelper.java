@@ -1,5 +1,6 @@
 package com.telran.remindly.fw;
 
+import com.telran.remindly.model.Reminder;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -95,8 +96,6 @@ public class RemindersHelper extends HelperBase{
         }
     }
 
-
-
     private String getSelectedYear() {
         return driver.findElement(By.id("month_text_view")).getText();
     }
@@ -124,17 +123,37 @@ public class RemindersHelper extends HelperBase{
         tap(By.id("android:id/button1"));
     }
 
-//    public void selectRepeatTime(String repeatMonth) {
-    public void selectRepeatTime() {
+    public void selectRepeatTime(String repeatMonth) {
+
         tap(By.id("repeat_type_text"));
-//        tap(By.xpath("//android.widget.TextView[@text='"+ repeatMonth +"']"));
-        tap(By.xpath("//android.widget.TextView[@text='Month']"));
+        tap(By.xpath("//android.widget.TextView[@text='"+ repeatMonth +"']"));
     }
 
-    public void removeNotification() {
-        tap(By.id("recycle_title"));
-        tap(By.id("discard_reminder"));
+    public void enterAllData(Reminder reminder) {
+        tapOnAddReminder();
+        fillReminderTitle(reminder.getTitle());
+        tapOnDataField();
+        selectCertainMonth(reminder.getType(), reminder.getNumber(), reminder.getMonth());
+        selectDay(reminder.getIndex());
+        tapOnYear();
+        selectYear(reminder.getType1(), reminder.getYear());
+        tapOnOK();
+        tapOnTime();
+        selectTimeOfDay(reminder.getTd());
+        tapWithCoordinates(reminder.getX(), reminder.getY());
+        tapWithCoordinates(reminder.getX(), reminder.getY());
+        tapOnOK();
+        tapOnRepeatSwitch();
+        enterRepeatNumber(reminder.getRepeat());
+        swipeUp();
+        selectRepeatTime(reminder.getType2());
+        saveReminder();
     }
 
+    public String isTitlePresent() {
+        String recycle_title = driver.findElement(By.id("recycle_title")).getText();
+        System.out.println(recycle_title);
+        return recycle_title;
+    }
 }
 

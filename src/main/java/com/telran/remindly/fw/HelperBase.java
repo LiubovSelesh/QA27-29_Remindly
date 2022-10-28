@@ -38,7 +38,6 @@ public class HelperBase {
     }
 
     public void pause(int millis) {
-//        Thread.sleep(millis);
         try {
             Thread.sleep(millis);
         } catch (InterruptedException e) {
@@ -103,10 +102,8 @@ public class HelperBase {
         TouchAction action = new TouchAction(driver);
 
         Dimension size = driver.manage().window().getSize();
-//get activity points
         int downPoint = (int) (size.height * 0.6);
         int upPoint = (int) (size.height * 0.5);
-//get Element's point
         WebElement element = driver.findElement(locator);
         int leftX = element.getLocation().getX();
         int rightX = leftX + element.getSize().getWidth();
@@ -121,10 +118,8 @@ public class HelperBase {
         TouchAction action = new TouchAction(driver);
 
         Dimension size = driver.manage().window().getSize();
-//get activity points
         int downPoint = (int) (size.height * 0.5);
         int upPoint = (int) (size.height * 0.6);
-//get Element's point
         WebElement element = driver.findElement(locator);
         int leftX = element.getLocation().getX();
         int rightX = leftX + element.getSize().getWidth();

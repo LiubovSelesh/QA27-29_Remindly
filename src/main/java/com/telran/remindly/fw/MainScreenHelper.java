@@ -1,7 +1,10 @@
 package com.telran.remindly.fw;
 
         import io.appium.java_client.AppiumDriver;
+        import io.appium.java_client.TouchAction;
+        import io.appium.java_client.touch.offset.PointOption;
         import org.openqa.selenium.By;
+        import org.openqa.selenium.Dimension;
         import org.openqa.selenium.WebElement;
 
         import java.util.List;
@@ -14,14 +17,11 @@ public class MainScreenHelper extends HelperBase{
 
     public boolean isNoReminderTextPresent() {
         return isElementPresent(By.id("no_reminder_text"));
-//        return isElementPresent(By.xpath("//*[@resource-id='com.blanyal.remindly:id/no_reminder_text']");
     }
 
     public boolean isLicenseeTextPresent() {
-//        return isElementPresent(By.id("toolbar"));
         tapMoreOptions();
         return isElementPresent(By.id("title"));
-//        return isElementPresent(By.xpath("toolbar"));
     }
 
 
@@ -44,4 +44,14 @@ public class MainScreenHelper extends HelperBase{
         return isElementPresent(By.id("licenses_text_view"));
     }
 
+    public void removeReminder() {
+        TouchAction action = new TouchAction(driver);
+        Dimension size = driver.manage().window().getSize();
+        int x = size.width / 2;
+        int y = size.height / 5;
+        action.longPress(PointOption.point(x, y))
+                .release()
+                .perform();
+        tap(By.id("discard_reminder"));
+    }
 }
